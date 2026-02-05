@@ -3,7 +3,6 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from enum import Enum
 
-# Enums for task status & priority
 class TaskStatus(str, Enum):
     pending = "pending"
     in_progress = "in_progress"
@@ -23,3 +22,4 @@ class Task(SQLModel, table=True):
     owner_id: UUID = Field(foreign_key="user.id")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+
