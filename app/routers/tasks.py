@@ -42,7 +42,6 @@ def list_tasks(
 ):
     stmt = select(Task).where(Task.owner_id == user.id)
 
-    # Filter status
     if status:
         status_list = [
             s.strip() for s in status.split(",") 
@@ -51,7 +50,6 @@ def list_tasks(
         if status_list:
             stmt = stmt.where(Task.status.in_(status_list))
 
-    # Filter priority
     if priority:
         priority_list = [
             p.strip() for p in priority.split(",") 
@@ -99,3 +97,4 @@ def delete_task(task_id: UUID, session: Session = Depends(get_session), user=Dep
     session.delete(task)
     session.commit()
     return {"message": "Task deleted"}
+
