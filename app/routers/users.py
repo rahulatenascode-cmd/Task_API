@@ -38,7 +38,6 @@ def list_users(
     stmt = select(User)
 
     if role:
-        # Safe outer join to include users with no role
         stmt = stmt.join(Role, isouter=True).where(Role.name == role)
 
     stmt = stmt.offset(offset).limit(limit)
@@ -98,3 +97,4 @@ def delete_user(user_id: str, session: Session = Depends(get_session)):
     session.delete(user)
     session.commit()
     return {"message": "User deleted"}
+
